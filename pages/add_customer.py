@@ -48,10 +48,16 @@ class AddCustomer:
 
     def input_post_code(self):
         post_code = self.driver.find_element(By.CSS_SELECTOR, '[ng-model="postCd"]')
-        post_code_value = self.post_code.text
+        post_code_value = self.post_code
         post_code.send_keys(post_code_value)
 
 
     def click_add_customer_button(self):
         add_customer_button = self.driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
         add_customer_button.click()
+
+
+    def ok_alert_message(self):
+        alert = self.driver.switch_to.alert
+        alert.accept()
+        self.driver.switch_to.default_content()
