@@ -51,17 +51,77 @@ def test_positive_1(driver):
     checks.new_one_customer_added()
 
 
-    #  customers.open()
-    #  customers.wait_for_page_load()
-    #  customers.click_customers()
-    #  customers.wait_for_form_load()
-    #  checks.customers_form_loaded()
+
+@allure.feature('NO Feature is here')
+@allure.story('Story is here')
+def test_customers_name_sort(driver):
+    #  Предусловие 1 : Открыть браузер
+    add_customer = AddCustomer(driver)
+    customers = Customers(driver)
+    checks = Checks(driver)
+
+    #  Предусловие 2 : Перейти по ссылке
+    customers.open()
+
+    #  Ожидание загрузки страницы
+    customers.wait_for_page_load()
+
+    #  Предусловие 3 : Нажимаем на "Customers"
+    customers.click_customers()
+
+    #  Ожидание загрузки формы
+    customers.wait_for_form_load()
+
+    #  Проверяем готовность к выполнению
+    checks.customers_form_loaded()
+
+    #  Шаг 1 : Кликаем на "First Name"
+    customers.click_first_name()
+
+    #  Шаг 2 : Проверяем на обратную сортировку
+    checks.first_name_reverse_sort()
+
+    #  Шаг 3 : Снова кликаем на "First Name"
+    customers.click_first_name()
+
+    #  Шаг 4 : Проверяем на сортировку
+    checks.first_name_sort()
+
+
+@allure.feature('Feature is here')
+@allure.story('NO Story is here')
+def test_customer_delete(driver):
+    #  Предусловие 1 : Открыть браузер
+    customers = Customers(driver)
+    checks = Checks(driver)
+
+    #  Предусловие 2 : Перейти по ссылке
+    customers.open()
+
+    #  Ожидание загрузки страницы
+    customers.wait_for_page_load()
+
+    #  Предусловие 3 : Нажимаем на "Customers"
+    customers.click_customers()
+
+    #  Ожидание загрузки формы
+    customers.wait_for_form_load()
+
+    #  Проверяем готовность к выполнению
+    checks.customers_form_loaded()
+
+    #  Шаг 1 : Удаляем нужного клиента
+    customers.delete_close_name()
+
+    #  Шаг 2 : Проверяем, удалился ли нужный клиент
+    checks.delete_customer_check()
 
 
 @allure.epic('NO Epic is here')
 @allure.feature('NO Feature is here')
 @allure.story('NO Story is here')
 def test_negative_1(driver):
+
     #  Предусловие 1 : Открыть браузер
     add_customer = AddCustomer(driver)
     customers = Customers(driver)
