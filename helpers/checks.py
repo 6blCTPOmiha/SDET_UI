@@ -1,7 +1,9 @@
 import re
 import allure
 from selenium.webdriver.common.by import By
+from helpers.help_func import StaticFunctions as Sf
 from selenium.webdriver.support.ui import Select
+from data.text_data import CUSTOMERS_MAIN_DATA_CSS
 
 
 class Checks:
@@ -22,6 +24,28 @@ class Checks:
 
 
     def new_one_customer_added(self):
-        customer = self.driver.find_elements(By.CSS_SELECTOR, '[class="ng-binding"]')
-        customer_count = len(customer) // 3
-        assert customer_count == 6
+        customers = self.driver.find_elements(By.CSS_SELECTOR, CUSTOMERS_MAIN_DATA_CSS)
+        customer_count = len(customers) // 3
+        with allure.step('Check customers count'):
+            assert customer_count == 6
+
+
+    def first_name_reverse_sort(self):
+        customers = self.driver.find_elements(By.CSS_SELECTOR, CUSTOMERS_MAIN_DATA_CSS)
+        names = Sf.chunks_to_names(customers)
+        with allure.step('Check customers reverse sort'):
+            assert names == sorted(names, reverse=True)
+
+
+    def first_name_sort(self):
+        customers = self.driver.find_elements(By.CSS_SELECTOR, CUSTOMERS_MAIN_DATA_CSS)
+        names = Sf.chunks_to_names(customers)
+        with allure.step('Check customers sort'):
+            assert names == sorted(names)
+
+
+    def delete_customer_check(self):
+        customers = self.driver.find_elements(By.CSS_SELECTOR, CUSTOMERS_MAIN_DATA_CSS)
+        names = Sf.chunks_to_names(customers)
+        with allure.step('Check deleted customer in customers list'):
+            assert 'Harry' not in names
