@@ -1,4 +1,4 @@
-from helpers.help_func import Functions
+from helpers.help_func import StaticFunctions as Sf
 from data.text_data import URL
 from data.text_data import LAST_NAME
 from selenium.webdriver.common.by import By
@@ -9,7 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 class AddCustomer:
     def __init__(self, driver):
         self.driver = driver
-        self.post_code = Functions.post_code_gen()
+        self.post_code = Sf.post_code_gen()
 
 
     def open(self):
@@ -37,7 +37,7 @@ class AddCustomer:
     def input_first_name(self):
         first_name = self.driver.find_element(By.CSS_SELECTOR, '[ng-model="fName"]')
         post_code_value = self.post_code
-        first_name_value = Functions.first_name_calc(post_code_value)
+        first_name_value = Sf.first_name_calc(post_code_value)
         first_name.send_keys(first_name_value)
 
 
