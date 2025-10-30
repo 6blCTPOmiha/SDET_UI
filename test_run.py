@@ -151,15 +151,9 @@ def test_negative_1(driver):
     #  Шаг 3 : Вводим код
     add_customer.input_post_code()
 
-    #  Шаг 4 : НЕ Нажимаем на кнопку подтверждения введённых данных
-    # add_customer.click_add_customer_button()
-
-    #  Шаг 5 : НЕ Нажимаем ОК в уведомлении
-    # add_customer.ok_alert_message()
-
-    #  Шаг 6 : Нажимаем на кнопку "Customers" (переходим к списку пользователей)
+    #  Шаг 4 : Нажимаем на кнопку "Customers" (переходим к списку пользователей)
     customers.click_customers()
     customers.wait_for_form_load()
 
-    #  Шаг 7 : Проверяем количество пользователей
+    #  Шаг 5 : Проверяем количество пользователей
     checks.new_one_customer_added()
