@@ -45,4 +45,3 @@ class Customers:
         del_id = Sf.calc_mid_len_name(names, sr_ar)
         del_btns = self.driver.find_elements(By.CSS_SELECTOR, '[ng-click="deleteCust(cust)"]')
         del_btns[del_id].click()
-
