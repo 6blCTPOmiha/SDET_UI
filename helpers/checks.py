@@ -1,8 +1,6 @@
-import re
 import allure
 from selenium.webdriver.common.by import By
 from helpers.help_func import StaticFunctions as Sf
-from selenium.webdriver.support.ui import Select
 from data.text_data import CUSTOMERS_MAIN_DATA_CSS
 
 
