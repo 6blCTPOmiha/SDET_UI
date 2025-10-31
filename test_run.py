@@ -6,6 +6,7 @@ from pages.customers import Customers
 from helpers.checks import Checks
 
 
+
 @allure.story('Тестирование добавления нового пользователя')
 @pytest.mark.add_customer
 def test_positive_add_customer(driver):
