@@ -1,10 +1,13 @@
 import allure
+import pytest
+
 from pages.add_customer import AddCustomer
 from pages.customers import Customers
 from helpers.checks import Checks
 
 
 @allure.story('Тестирование добавления нового пользователя')
+@pytest.mark.add_customer
 def test_positive_add_customer(driver):
     #  Предусловие 1 : Открыть браузер
     add_customer = AddCustomer(driver)
@@ -51,6 +54,7 @@ def test_positive_add_customer(driver):
 
 
 @allure.story('Тестирование сортировки в 2 стороны')
+@pytest.mark.name_sort
 def test_positive_customers_name_sort(driver):
     #  Предусловие 1 : Открыть браузер
     customers = Customers(driver)
@@ -85,6 +89,7 @@ def test_positive_customers_name_sort(driver):
 
 
 @allure.story('Тестирование удаления пользователя')
+@pytest.mark.delete
 def test_positive_customer_delete(driver):
     #  Предусловие 1 : Открыть браузер
     customers = Customers(driver)
@@ -113,6 +118,7 @@ def test_positive_customer_delete(driver):
 
 
 @allure.story('Тестирование добавления нового пользователя')
+@pytest.mark.add_customer
 def test_negative_add_customer(driver):
 
     #  Предусловие 1 : Открыть браузер
@@ -153,6 +159,7 @@ def test_negative_add_customer(driver):
 
 
 @allure.story('Тестирование сортировки в 2 стороны')
+@pytest.mark.name_sort
 def test_negative_customers_name_sort(driver):
     #  Предусловие 1 : Открыть браузер
     customers = Customers(driver)
@@ -181,6 +188,7 @@ def test_negative_customers_name_sort(driver):
 
 
 @allure.story('Тестирование удаления пользователя')
+@pytest.mark.delete
 def test_negative_customer_delete(driver):
     #  Предусловие 1 : Открыть браузер
     customers = Customers(driver)
