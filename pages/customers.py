@@ -6,7 +6,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-
 class Customers:
     def __init__(self, driver):
         self.driver = driver
@@ -60,4 +59,3 @@ class Customers:
         del_btns = self.driver.find_elements(By.CSS_SELECTOR, '[ng-click="deleteCust(cust)"]')
         with allure.step(f'Удаление клиента {names[del_id]}'):
             del_btns[del_id].click()
-
