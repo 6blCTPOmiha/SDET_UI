@@ -25,13 +25,21 @@ pipeline {
                 '''
             }
         }
+        
+        stage('Генерация отчета Allure') {
+            steps {
+                bat '''
+                    if not exist "allure-report" mkdir allure-report
+                    echo "Allure результаты будут сохранены в allure-results/"
+                '''
+            }
+        }
     }
     
     post {
         always {
-            allure includeProperties: false, 
-                   jdk: '', 
-                   results: [[path: 'allure-results']]
+            archiveArtifacts artifacts: 'allure-results/**', fingerprint: true
+            echo "Allure результаты сохранены в allure-results/"
         }
     }
 }
