@@ -2,53 +2,25 @@ pipeline {
     agent any
     
     stages {
-        stage('Установка Python если нужно') {
+        stage('Установка Python') {
             steps {
-                sh '''
-                    # Для Ubuntu/Debian
-                    if ! command -v python3 &> /dev/null; then
-                        echo "Устанавливаем Python3..."
-                        sudo apt-get update
-                        sudo apt-get install -y python3 python3-pip
-                    fi
-                    
-                    # Проверяем установку
-                    python3 --version
-                '''
-            }
-        }
-        stage('Checkout') {
-            steps {
-                git branch: 'dev', 
-                    url: 'https://github.com/6blCTPOmiha/SDET_UI'
+                sh 'sudo apt-get update'
+                sh 'sudo apt-get install -y python3 python3-pip'
+                sh 'python3 --version'
             }
         }
         
-        stage('Install Dependencies') {
+        stage('Клонирование') {
             steps {
-                sh 'pip install -r requirements.txt'
+                git 'https://github.com/6blCTPOmiha/SDET_UI'
             }
         }
         
-        stage('Run Tests') {
+        stage('Тестирование') {
             steps {
-                sh 'python -m pytest tests/ -v'
-                // или sh 'python -m unittest discover -v'
+                sh 'python3 -m pip install -r requirements.txt'
+                sh 'python3 -m pytest'
             }
-        }
-        
-        stage('Generate Report') {
-            steps {
-                sh 'allure generate allure-results -o allure-report --clean'
-            }
-        }
-    }
-    
-    post {
-        always {
-            allure includeProperties: false, 
-                   jdk: '', 
-                   results: [[path: 'allure-results']]
         }
     }
 }
