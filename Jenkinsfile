@@ -13,7 +13,7 @@ pipeline {
             steps {
                 bat '''
                     pip install -r requirements.txt
-                    pip install allure-pytest
+                    pip install allure-pytest pytest-xdist
                 '''
             }
         }
@@ -21,7 +21,7 @@ pipeline {
         stage('Запуск тестов') {
             steps {
                 bat '''
-                    python -m pytest test_run.py -v -n auto --alluredir=allure-results
+                    pytest test_run.py -v --alluredir=allure-results -n 2
                 '''
             }
         }
