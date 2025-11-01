@@ -2,22 +2,6 @@ pipeline {
     agent any
     
     stages {
-        stage('Проверка Python') {
-            steps {
-                bat '''
-                    python --version
-                    if errorlevel 1 (
-                        echo "Python не установлен. Устанавливаем..."
-                        # Скачать и установить Python
-                        curl -o python-installer.exe https://www.python.org/ftp/python/3.9.0/python-3.9.0-amd64.exe
-                        python-installer.exe /quiet InstallAllUsers=1 PrependPath=1
-                        timeout /t 30
-                    )
-                    python --version
-                '''
-            }
-        }
-        
         stage('Клонирование') {
             steps {
                 git branch: 'main', 
@@ -25,20 +9,27 @@ pipeline {
             }
         }
         
-        stage('Зависимости') {
+        stage('Установка зависимостей') {
             steps {
                 bat '''
                     pip install -r requirements.txt
+                    pip install allure-pytest
                 '''
             }
         }
         
-        stage('Тесты') {
+        stage('Запуск тестов') {
             steps {
                 bat '''
                     python -m pytest test_run.py -v
                 '''
             }
+        }
+    }
+    
+    post {
+        always {
+            echo "Тесты завершены"
         }
     }
 }
