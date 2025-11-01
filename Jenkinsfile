@@ -21,7 +21,7 @@ pipeline {
         stage('Запуск тестов') {
             steps {
                 bat '''
-                    python -m pytest test_run.py -v --alluredir=allure-results
+                    python -m pytest test_run.py -v -n auto --alluredir=allure-results
                 '''
             }
         }
