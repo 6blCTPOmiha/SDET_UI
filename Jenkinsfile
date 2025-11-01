@@ -1,7 +1,8 @@
 pipeline {
     agent any
-
-    stage('Установка Python если нужно') {
+    
+    stages {
+        stage('Установка Python если нужно') {
             steps {
                 sh '''
                     # Для Ubuntu/Debian
@@ -16,12 +17,6 @@ pipeline {
                 '''
             }
         }
-    
-    tools {
-        python "Python3"
-    }
-    
-    stages {
         stage('Checkout') {
             steps {
                 git branch: 'dev', 
