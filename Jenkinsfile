@@ -1,5 +1,21 @@
 pipeline {
     agent any
+
+    stage('Установка Python если нужно') {
+            steps {
+                sh '''
+                    # Для Ubuntu/Debian
+                    if ! command -v python3 &> /dev/null; then
+                        echo "Устанавливаем Python3..."
+                        sudo apt-get update
+                        sudo apt-get install -y python3 python3-pip
+                    fi
+                    
+                    # Проверяем установку
+                    python3 --version
+                '''
+            }
+        }
     
     tools {
         python "Python3"
