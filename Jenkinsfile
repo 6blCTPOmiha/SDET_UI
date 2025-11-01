@@ -21,7 +21,17 @@ pipeline {
         stage('Запуск тестов') {
             steps {
                 bat '''
-                    python -m pytest test_run.py -v
+                    python -m pytest test_run.py -v --alluredir=allure-results
+                '''
+            }
+        }
+        
+        stage('Генерация отчета Allure') {
+            steps {
+                bat '''
+                    # Создаем директорию для отчетов
+                    if not exist "allure-report" mkdir allure-report
+                    echo "Allure результаты сохранены в allure-results/"
                 '''
             }
         }
@@ -29,7 +39,9 @@ pipeline {
     
     post {
         always {
-            echo "Тесты завершены"
+            // Архивируем результаты для скачивания
+            archiveArtifacts artifacts: 'allure-results/**', fingerprint: true
+            echo "Allure результаты сохранены в allure-results/"
         }
     }
 }
