@@ -1,5 +1,4 @@
 import allure
-from data.text_data import URL, CUSTOMERS_MAIN_DATA_CSS
 from helpers.help_func import StaticFunctions as Sf
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -9,10 +8,12 @@ from selenium.webdriver.support import expected_conditions as EC
 class Customers:
     def __init__(self, driver):
         self.driver = driver
+        self.url = 'https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager'
+        self.customers_main_data_css = '[class="ng-binding"]'
 
 
     def open(self):
-        self.driver.get(URL)
+        self.driver.get(self.url)
 
 
     def wait_for_page_load(self):
@@ -42,7 +43,7 @@ class Customers:
 
 
     def delete_close_name(self):
-        customers = self.driver.find_elements(By.CSS_SELECTOR, CUSTOMERS_MAIN_DATA_CSS)
+        customers = self.driver.find_elements(By.CSS_SELECTOR, self.customers_main_data_css)
         names = Sf.chunks_to_names(customers)
         sr_ar = Sf.math_round(Sf.calc_sr_ar(names))
         del_id = Sf.calc_mid_len_name(names, sr_ar)
@@ -52,7 +53,7 @@ class Customers:
 
 
     def delete_wrong_name(self):
-        customers = self.driver.find_elements(By.CSS_SELECTOR, CUSTOMERS_MAIN_DATA_CSS)
+        customers = self.driver.find_elements(By.CSS_SELECTOR, self.customers_main_data_css)
         names = Sf.chunks_to_names(customers)
         wrong_sr_ar = Sf.math_round(Sf.calc_sr_ar(names)) - 2
         del_id = Sf.calc_mid_len_name(names, wrong_sr_ar)

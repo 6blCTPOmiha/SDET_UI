@@ -1,6 +1,5 @@
 from helpers.help_func import StaticFunctions as Sf
-from data.text_data import URL
-from data.text_data import LAST_NAME
+from data.text_data import LAST_NAME, POST_CODE_1
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -9,11 +8,13 @@ from selenium.webdriver.support import expected_conditions as EC
 class AddCustomer:
     def __init__(self, driver):
         self.driver = driver
-        self.post_code = Sf.post_code_gen()
+        self.post_code_2 = Sf.post_code_gen()
+        self.post_code_1 = POST_CODE_1
+        self.url = 'https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager'
 
 
     def open(self):
-        self.driver.get(URL)
+        self.driver.get(self.url)
 
 
     def wait_for_page_load(self):
@@ -27,6 +28,7 @@ class AddCustomer:
         add_customer_button = self.driver.find_element(By.CSS_SELECTOR, '[ng-class="btnClass1"]')
         add_customer_button.click()
 
+
     def wait_for_form_load(self):
         wait = WebDriverWait(self.driver, 5)
         wait.until(EC.presence_of_element_located(
@@ -36,7 +38,7 @@ class AddCustomer:
 
     def input_first_name(self):
         first_name = self.driver.find_element(By.CSS_SELECTOR, '[ng-model="fName"]')
-        post_code_value = self.post_code
+        post_code_value = self.post_code_1
         first_name_value = Sf.first_name_calc(post_code_value)
         first_name.send_keys(first_name_value)
 
@@ -48,7 +50,7 @@ class AddCustomer:
 
     def input_post_code(self):
         post_code = self.driver.find_element(By.CSS_SELECTOR, '[ng-model="postCd"]')
-        post_code_value = self.post_code
+        post_code_value = self.post_code_1
         post_code.send_keys(post_code_value)
 
 
