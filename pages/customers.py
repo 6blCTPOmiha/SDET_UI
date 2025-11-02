@@ -12,51 +12,54 @@ class Customers:
         self.customers_main_data_css = '[class="ng-binding"]'
 
 
-    def open(self):
-        self.driver.get(self.url)
+    with allure.step('Открытие веб-страницы'):
+        def open(self):
+            self.driver.get(self.url)
 
 
-    def wait_for_page_load(self):
-        wait = WebDriverWait(self.driver, 5)
-        wait.until(EC.presence_of_element_located(
-            (By.CSS_SELECTOR, '[ng-class="btnClass3"]')
-        ), message='Страница не загружается')
+    with allure.step('Ожидание загрузки веб-страницы'):
+        def wait_for_page_load(self):
+            wait = WebDriverWait(self.driver, 5)
+            wait.until(EC.presence_of_element_located(
+                (By.CSS_SELECTOR, '[ng-class="btnClass3"]')
+            ), message='Страница не загружается')
 
 
-    def click_customers(self):
-        customers_button = self.driver.find_element(By.CSS_SELECTOR, '[ng-class="btnClass3"]')
-        with allure.step('Нажатие на кнопку customers'):
+    with allure.step('Нажатие на кнопку customers'):
+        def click_customers(self):
+            customers_button = self.driver.find_element(By.CSS_SELECTOR, '[ng-class="btnClass3"]')
             customers_button.click()
 
 
-    def wait_for_form_load(self):
-        wait = WebDriverWait(self.driver, 5)
-        wait.until(EC.presence_of_element_located(
-            (By.XPATH, '//td[contains(text(), "Hermoine")]')
-        ), message='Форма не загружается')
+    with allure.step('Ожидание загрузки формы'):
+        def wait_for_form_load(self):
+            wait = WebDriverWait(self.driver, 5)
+            wait.until(EC.presence_of_element_located(
+                (By.XPATH, '//td[contains(text(), "Hermoine")]')
+            ), message='Форма не загружается')
 
 
-    def click_first_name(self):
-        first_name = self.driver.find_element(By.XPATH, '//a[contains(text(), "First Name")]')
-        with allure.step('Нажатие на гипертекст first_name'):
+    with allure.step('Нажатие на First Name(сортировка)'):
+        def click_first_name(self):
+            first_name = self.driver.find_element(By.XPATH, '//a[contains(text(), "First Name")]')
             first_name.click()
 
 
-    def delete_close_name(self):
-        customers = self.driver.find_elements(By.CSS_SELECTOR, self.customers_main_data_css)
-        names = Sf.chunks_to_names(customers)
-        sr_ar = Sf.math_round(Sf.calc_sr_ar(names))
-        del_id = Sf.calc_mid_len_name(names, sr_ar)
-        del_btns = self.driver.find_elements(By.CSS_SELECTOR, '[ng-click="deleteCust(cust)"]')
-        with allure.step(f'Удаление клиента {names[del_id]}'):
+    with allure.step('Удаление правильного клиента'):
+        def delete_close_name(self):
+            customers = self.driver.find_elements(By.CSS_SELECTOR, self.customers_main_data_css)
+            names = Sf.chunks_to_names(customers)
+            sr_ar = Sf.math_round(Sf.calc_sr_ar(names))
+            del_id = Sf.calc_mid_len_name(names, sr_ar)
+            del_btns = self.driver.find_elements(By.CSS_SELECTOR, '[ng-click="deleteCust(cust)"]')
             del_btns[del_id].click()
 
 
-    def delete_wrong_name(self):
-        customers = self.driver.find_elements(By.CSS_SELECTOR, self.customers_main_data_css)
-        names = Sf.chunks_to_names(customers)
-        wrong_sr_ar = Sf.math_round(Sf.calc_sr_ar(names)) - 2
-        del_id = Sf.calc_mid_len_name(names, wrong_sr_ar)
-        del_btns = self.driver.find_elements(By.CSS_SELECTOR, '[ng-click="deleteCust(cust)"]')
-        with allure.step(f'Удаление клиента {names[del_id]}'):
+    with allure.step('Удаление неправильного клиента'):
+        def delete_wrong_name(self):
+            customers = self.driver.find_elements(By.CSS_SELECTOR, self.customers_main_data_css)
+            names = Sf.chunks_to_names(customers)
+            wrong_sr_ar = Sf.math_round(Sf.calc_sr_ar(names)) - 2
+            del_id = Sf.calc_mid_len_name(names, wrong_sr_ar)
+            del_btns = self.driver.find_elements(By.CSS_SELECTOR, '[ng-click="deleteCust(cust)"]')
             del_btns[del_id].click()
