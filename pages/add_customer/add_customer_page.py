@@ -17,8 +17,8 @@ class AddCustomerPage(BasePage):
 
 
     @allure.step('Открытие веб-страницы')
-    def open(self, **kwargs):
-        super().open(self.url)
+    def open_page(self):
+        self.open(self.url)
 
 
     @allure.step('Ожидание загрузки страницы')
@@ -71,6 +71,4 @@ class AddCustomerPage(BasePage):
 
     @allure.step('Нажатие ок на алерте')
     def click_ok_alert_message(self):
-        alert = self.driver.switch_to.alert
-        alert.accept()
-        self.driver.switch_to.default_content()
+        self.accept_alert()
