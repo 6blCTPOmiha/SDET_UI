@@ -17,7 +17,7 @@ class TestRun:
         add_customer_page = AddCustomerPage(driver)
         customers_page = CustomersPage(driver)
         customers_checks = CustomersChecks(driver)
-        add_customer_page.open()
+        add_customer_page.open_page()
         add_customer_page.wait_for_page_load()
         add_customer_page.click_add_customer()
         add_customer_page.wait_for_form_load()
@@ -38,7 +38,7 @@ class TestRun:
     def test_positive_customers_name_sort(self, driver):
         customers = CustomersPage(driver)
         customers_checks = CustomersChecks(driver)
-        customers.open()
+        customers.open_page()
         customers.wait_for_page_load()
         customers.click_customers()
         customers.wait_for_form_load()
@@ -55,7 +55,7 @@ class TestRun:
     def test_positive_customer_delete(self, driver):
         customers = CustomersPage(driver)
         customers_checks = CustomersChecks(driver)
-        customers.open()
+        customers.open_page()
         customers.wait_for_page_load()
         customers.click_customers()
         customers.wait_for_form_load()
@@ -71,7 +71,7 @@ class TestRun:
         add_customer = AddCustomerPage(driver)
         customers = CustomersPage(driver)
         customers_checks = CustomersChecks(driver)
-        add_customer.open()
+        add_customer.open_page()
         add_customer.wait_for_page_load()
         add_customer.click_add_customer()
         add_customer.wait_for_form_load()
@@ -90,7 +90,7 @@ class TestRun:
     def test_negative_customers_name_sort(self, driver):
         customers = CustomersPage(driver)
         customers_checks = CustomersChecks(driver)
-        customers.open()
+        customers.open_page()
         customers.wait_for_page_load()
         customers.click_customers()
         customers.wait_for_form_load()
@@ -105,7 +105,7 @@ class TestRun:
     def test_negative_customer_delete(self, driver):
         customers = CustomersPage(driver)
         customers_checks = CustomersChecks(driver)
-        customers.open()
+        customers.open_page()
         customers.wait_for_page_load()
         customers.click_customers()
         customers.wait_for_form_load()

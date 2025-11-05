@@ -73,3 +73,8 @@ class BasePage:
 
     def open(self, url):
         self.driver.get(url)
+
+    def accept_alert(self):
+        alert = self.driver.switch_to.alert
+        alert.accept()
+        self.driver.switch_to.default_content()

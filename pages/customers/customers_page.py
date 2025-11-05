@@ -14,8 +14,8 @@ class CustomersPage(BasePage):
 
 
     @allure.step('Открытие веб-страницы')
-    def open(self, **kwargs):
-        super().open(self.url)
+    def open_page(self):
+        self.open(self.url)
 
 
     @allure.step('Ожидание загрузки веб-страницы')
