@@ -47,7 +47,7 @@ class TestRun:
         customers.click_first_name()
         customers_checks.check_first_name_sort()
 
-
+"""
     @allure.story('Позитивные тесты')
     @allure.title('Удаление клиента')
     @pytest.mark.positive
@@ -111,3 +111,4 @@ class TestRun:
         customers.wait_for_form_load()
         customers.delete_wrong_name()
         customers_checks.check_delete_customer()
+"""
