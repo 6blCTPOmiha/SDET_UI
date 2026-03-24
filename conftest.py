@@ -6,6 +6,10 @@ from selenium.webdriver.chrome.options import Options
 @pytest.fixture
 def driver():
     options = Options()
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-gpu")
+    options.page_load_strategy = 'eager'
     driver = webdriver.Chrome(options=options)
     driver.maximize_window()
     yield driver
