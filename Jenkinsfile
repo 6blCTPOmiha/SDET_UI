@@ -20,10 +20,11 @@ pipeline {
         
         stage('Запуск тестов') {
             steps {
-                def exitCode = bat(script: 'pytest tests/test_run.py -v --alluredir=allure-results', returnStatus: true)
-
-                if (exitCode != 0) {
-                    currentBuild.result = 'UNSTABLE'
+                script {
+                    def exitCode = bat(script: 'pytest tests/test_run.py -v --alluredir=allure-results', returnStatus: true)
+                    if (exitCode != 0) {
+                        currentBuild.result = 'UNSTABLE'
+                    }
                 }
             }
         }
