@@ -6,5 +6,6 @@ COPY . .
 
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install allure-pytest pytest-xdist
+RUN chmod -R 777 /app
 
 CMD ["pytest", "tests", "--alluredir=allure-results"] 
