@@ -9,7 +9,7 @@ services:
       - "4444:4444"
     volumes:
       - "./config:/etc/selenoid:ro"
-      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "//./pipe/docker_engine://./pipe/docker_engine"
 
   test-runner:
     build: .
