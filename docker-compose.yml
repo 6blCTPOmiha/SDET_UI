@@ -1,3 +1,7 @@
+networks:
+  default:
+    name: allure_task_default
+
 services:
 
   selenoid:
@@ -9,11 +13,12 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./config:/etc/selenoid:ro
     shm_size: 2g
-    network_mode: bridge
     environment:
       - DOCKER_API_VERSION=1.41
     privileged: true
     command:
+      - "-container-network"
+      - "allure_task_default"
       - "-conf"
       - "/etc/selenoid/browsers.json"
       - "-limit"
