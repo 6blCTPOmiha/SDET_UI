@@ -10,6 +10,7 @@ def driver():
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-gpu")
     options.page_load_strategy = 'eager'
+    options.set_capability("browserName", "chrome")
     driver = webdriver.Remote(command_executor='http://selenoid:4444/wd/hub', options=options)
     # driver = webdriver.Chrome(options=options)
     driver.maximize_window()
