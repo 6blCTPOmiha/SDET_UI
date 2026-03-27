@@ -111,3 +111,5 @@ class TestRun:
         customers.wait_for_form_load()
         customers.delete_wrong_name()
         customers_checks.check_delete_customer()
+
+
