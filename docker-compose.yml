@@ -15,8 +15,6 @@ services:
       - "/etc/selenoid/browsers.json"
       - "-limit"
       - "1"
-      - "-container-network"
-      - "selenoid_project_default"
       
   test-runner:
     build: .
