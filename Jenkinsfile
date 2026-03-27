@@ -20,9 +20,12 @@ pipeline {
         
         stage('Запуск тестов') {
             steps {
-                bat '''
-                    pytest test_run.py -v --alluredir=allure-results -n 2
-                '''
+                script {
+                    def exitCode = bat(script: 'pytest tests/test_run.py -v --alluredir=allure-results', returnStatus: true)
+                    if (exitCode != 0) {
+                        currentBuild.result = 'UNSTABLE'
+                    }
+                }
             }
         }
         
@@ -30,6 +33,7 @@ pipeline {
             steps {
                 bat '''
                     if not exist "allure-report" mkdir allure-report
+                    allure generate allure-results --clean -o allure-report
                     echo "Allure результаты будут сохранены в allure-results/"
                 '''
             }
@@ -40,6 +44,12 @@ pipeline {
         always {
             archiveArtifacts artifacts: 'allure-results/**', fingerprint: true
             echo "Allure результаты сохранены в allure-results/"
+            archiveArtifacts artifacts: 'allure-report/**', fingerprint: true
+            publishHTML(target: [
+                reportDir: 'allure-report',
+                reportFiles: 'index.html',
+                reportName: "Allure Report"
+            ])
         }
     }
 }
