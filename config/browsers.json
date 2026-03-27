@@ -8,7 +8,7 @@
         "path": "/",
         "env": [
           "ENABLE_VNC=false",
-          "DISPLAY=:99"]
+          "DISPLAY=:99"],
         "tmpfs": {
           "/tmp": "size=1g"
         }
