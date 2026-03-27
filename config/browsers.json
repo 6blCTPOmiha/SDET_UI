@@ -4,7 +4,6 @@
     "versions": {
       "128.0": {
         "image": "selenoid/chrome:128.0",
-        "network": "allure_task_default"
       }
     }
   }
