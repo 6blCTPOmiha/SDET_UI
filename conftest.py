@@ -13,7 +13,6 @@ def driver():
     options.page_load_strategy = 'eager'
     options.set_capability("browserName", "chrome")
     driver = webdriver.Remote(command_executor='http://selenoid:4444/wd/hub', options=options)
-    # driver = webdriver.Chrome(options=options)
     driver.maximize_window()
     yield driver
     driver.quit()
