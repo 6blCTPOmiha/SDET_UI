@@ -30,9 +30,4 @@ services:
       - selenoid
     volumes:
       - .:/app
-    command: >
-      bash -c "
-      echo 'Waiting for selenoid...' &&
-      until curl -s http://selenoid:4444/status; do sleep 2; done &&
-      echo 'Selenoid is ready' &&
-      pytest tests -v --alluredir=allure-results --junitxml=report.xml -p no:cacheprovider"
+    command: ["bash", "entrypoint.sh"]
