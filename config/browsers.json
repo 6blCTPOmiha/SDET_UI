@@ -6,9 +6,6 @@
         "image": "selenoid/chrome:128.0",
         "port": "4444",
         "path": "/",
-        "env": [
-          "ENABLE_VNC=false",
-          "DISPLAY=:99"],
         "tmpfs": {
           "/tmp": "size=1g"
         }
